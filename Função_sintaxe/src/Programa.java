@@ -8,15 +8,12 @@ public class Programa {
 		System.out.println("Enter three numbers:");
 		int a = sc.nextInt();
 		int b = sc.nextInt();
-		int c = sc.nextInt();
-
-		if (a > b && a > c) {
-			System.out.println("Higher = " + a);
-		} else if (b > c) {
-			System.out.println("Higher = " + b);
-		} else {
-			System.out.println("Higher = " + c);
-		}
+		int c = sc.nextInt(); 
+		
+		int higher = max(a, b, c);
+		
+		showResult(higher);
+		
 		sc.close();
 	}
 
