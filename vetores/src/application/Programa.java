@@ -3,6 +3,8 @@ package application;
 import java.util.Locale;
 import java.util.Scanner;
 
+import entities.Product;
+
 public class Programa {
 
 	public static void main(String[] args) {
@@ -10,17 +12,19 @@ public class Programa {
 		Scanner sc = new Scanner(System.in);
 		
 		int n = sc.nextInt();
-		double[] vect = new double [3];// para criar um vetor e no tamanho de [n]
+		Product[] vect = new Product[n];
 		
-		for (int i=0; i<n; i++) {
-			vect[i] = sc.nextDouble();
+		for(int i=0; i<n; i++) {
+			sc.nextLine();
+			String name = sc.nextLine();
+			double price = sc.nextDouble();
+			vect[i] = new Product(name, price);
 		}
 		double soma = 0.0;
-		for (int i=0; i<n; i++) {//vai acumular somando todos os tetores
-			soma += vect[i];
+		for(int i=0; i<n; i++) {
+			soma += vect[i].getPrice();//pegando só o preço pra somar todos os vetores
 		}
-		double avg = soma / n;//calculanda a média
-		
+		double avg = soma / n;
 		System.out.printf("AVEREGE HEIGHT: %.2f%n", avg);
 		sc.close();
 	}
