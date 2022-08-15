@@ -1,10 +1,10 @@
 package app;
 
+import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Program {
 
@@ -14,21 +14,34 @@ public class Program {
 		LocalDateTime d05 = LocalDateTime.parse("2022-07-10T12:00:00");//
 		Instant d06 = Instant.parse("2022-07-10T01:30:00Z");//
 
-		LocalDate r1 = LocalDate.ofInstant(d06, ZoneId.systemDefault());// pega o fuso do usuário
-		LocalDate r2 = LocalDate.ofInstant(d06, ZoneId.of("Portugal"));// pode escolher o fuso
-		LocalDateTime r3 = LocalDateTime.ofInstant(d06, ZoneId.systemDefault());
-		LocalDateTime r4 = LocalDateTime.ofInstant(d06, ZoneId.of("Portugal"));
+		LocalDate pastWeekLocalDate = d04.minusDays(7);// menos (dia) que colocar
+		LocalDate nextWeekLocalDate = d04.plusDays(7);// mais (dia)
+		LocalDate nextYearsLocalDate = d04.plusYears(7);// somando mais anos
 
-		System.out.println("r1 = " + r1);
-		System.out.println("r2 = " + r2);
-		System.out.println("r3 = " + r3);
-		System.out.println("r4 = " + r4);
+		System.out.println("pastWeekLocalDate = " + pastWeekLocalDate);
+		System.out.println("nextWeekLocalDate = " + nextWeekLocalDate);
+		System.out.println("nextYearsLocalDate = " + nextYearsLocalDate);
 
-		System.out.println("d04 dia = " + d04.getDayOfMonth());//PEGA O DIA DO MÊS
-		System.out.println("d04 mês = " + d04.getMonthValue());//PEGA O MÊS
-		System.out.println("d04 ano = " + d04.getYear());//PEGA O ANO
-		
-		System.out.println("d05 hora = " + d05.getHour());//PEGA A HORA
-		System.out.println("d05 hora = " + d05.getMinute());//PEGA MINUTO
+		LocalDateTime pastWeekLocalDateTime = d05.minusDays(7);// menos (dia) que colocar
+		LocalDateTime nextWeekLocalDateTime = d05.plusDays(7);
+
+		System.out.println("pastWeekLocalDateTime = " + pastWeekLocalDateTime);
+		System.out.println("nextWeekLocalDateTime = " + nextWeekLocalDateTime);
+
+		Instant pastWeekInstant = d06.minus(7, ChronoUnit.DAYS);
+		Instant nextWeekInstant = d06.plus(7, ChronoUnit.DAYS);
+
+		System.out.println("pastWeekInstant = " + pastWeekInstant);
+		System.out.println("nextWeekInstant = " + nextWeekInstant);
+
+		Duration t1 = Duration.between(pastWeekLocalDate.atStartOfDay(), d04.atStartOfDay());//duração de dias
+		Duration t2 = Duration.between(pastWeekLocalDateTime, d05);
+		Duration t3 = Duration.between(pastWeekInstant, d06);
+		Duration t4 = Duration.between(d06, pastWeekInstant);
+
+		System.out.println("t1 dias = " + t1.toDays());
+		System.out.println("t2 dias = " + t2.toDays());
+		System.out.println("t3 dias = " + t3.toDays());
+		System.out.println("t4 dias = " + t4.toDays());
 	}
 }
