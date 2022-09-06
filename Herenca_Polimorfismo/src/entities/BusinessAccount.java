@@ -26,5 +26,9 @@ public class BusinessAccount extends Account {// BusinessAccount herdar Account
 			balance += amount - 10.0;
 		}
 	}
-
+	@Override
+	public void withdraw(double amount) {
+		super.withdraw(amount);//reutilizando o que esta no sperclasse
+		balance -= 2.0;
+	}
 }
