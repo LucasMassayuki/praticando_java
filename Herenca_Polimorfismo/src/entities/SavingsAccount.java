@@ -24,7 +24,7 @@ public class SavingsAccount  extends Account{
 		balance += balance * interestRate;//saldo * taxa de juros
 	}
 	@Override
-	public void withdraw(double amount) {
+	public final void withdraw(double amount) {//colocando funal para não ser sobreposto
 		balance -= amount;
 	}
 }
