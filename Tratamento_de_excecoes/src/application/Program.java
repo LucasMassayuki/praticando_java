@@ -1,39 +1,30 @@
 package application;
 
-import java.util.InputMismatchException;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Program {
 
 	public static void main(String[] args) {
-		
-		method1();
-		
-		System.out.println("End of program");
-		
-	}
-	public static void method1() {
-		System.out.println("***METHO1 START***");
-		method2();
-		System.out.println("***METHO1 END***");
-	}
-	public static void method2() {
-		System.out.println("***METHO2 START***");
-		Scanner sc = new Scanner(System.in);
+		File file = new File("C:\\temp\\in.text");//se tiver algo escrito vai aparecer
+		Scanner sc = null;
 		try {
-			String[] vect = sc.nextLine().split(" ");
-			int position = sc.nextInt();
-			System.out.println(vect[position]);
+			sc = new Scanner(file);
+			while(sc.hasNextLine()) {
+				System.out.println(sc.nextLine());
+			}
 		}
-		catch(ArrayIndexOutOfBoundsException e) {//caso digite um numero fora da posição
-			System.out.println("invalid position!");
-			e.printStackTrace();//imprime na tela o rastriamento de Stack
-			sc.next();
+		catch(FileNotFoundException e) {
+			System.out.println("Erroropening file: " + e.getMessage());//caso não tem, vai aparecer este  
 		}
-		catch(InputMismatchException e) {//caso digite letras na hora de digitar int position = sc.extDouble();
-			System.out.println("input error");
+		finally {
+			if(sc != null) {
+				sc.close();
+			}
+			System.out.println("Finally block executed");
 		}
-		sc.close();
-		System.out.println("***METHO2 END***");
+		
 	}
+	
 }
